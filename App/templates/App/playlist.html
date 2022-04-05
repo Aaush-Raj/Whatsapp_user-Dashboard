@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <title>User List</title>
+    <style>
+        .og-contianer{
+            max-width: 1200px;
+            margin: auto;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+            background: #1c1f21 !important;
+            padding: 30px;
+            border-radius: 10px;
+          }
+          .heading-line{
+            position: relative;
+            display: block;
+            padding: 0px 0px 10px 0px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: .35s ease;
+            border-bottom: 3px solid transparent;
+            font-size: 48px;
+            color: #fff;
+          }
+          .heading-line:after {
+              position: absolute;
+              display: inline-block;
+              background: #efa617;
+              content: " ";
+              height: 0;
+              transition: .35s ease;
+              bottom: 0;
+              width: 100px;
+              height: 3px;
+              margin: 0 auto;
+              left: 0;
+              transform: none;
+          }
+          .og-row{
+            display:flex;
+            flex-wrap: wrap;
+            padding: 15px 0px;
+          }
+          .og-row select{
+            padding: 10px;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #222629;
+            background-color: #222629;
+            color: #fff;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+          }
+          .text-center{
+            text-align: center;
+          }
+          .og-li{
+            border-bottom: 1px solid #3e4042;
+            color: #fff;
+            font-size: 18px;
+          }
+          og-li-col{
+            padding: 0px 10px;
+          }
+          .og-li-col-1{
+            width:5%;
+          }
+          .og-li-col-2{
+            width:15%;
+          }
+          .og-li-col-3{
+            width:13%;
+          }
+          .og-li-col-4{
+            width:13%;
+          }
+          .og-li-col-5{
+            width:13%;
+          }
+          .og-li-col-6{
+            width:15%;
+          }
+          .og-li-col-7{
+            width:13%;
+          }
+          .og-li-col-8{
+            width:13%;
+          }
+          .og-li-head{
+            font-size: 20px;
+            font-weight: 700;
+          }
+          .hide{
+            display:none;
+          }
+    </style>
+</head>
+<body>
+    <div class="og-contianer">
+        <h1 class="heading-line">Contractor List</h1>
+        <div class="og-row" id="og-filters">
+          <select class="" id="education" placeholder="Education">
+            <option value="" selected="">Status</option>
+            <option value="Engineering">Active</option>
+            <option value="Non-Engineering">Not Active</option>
+          </select>
+          <select class="" id="experience" placeholder="Experience">
+            <option value="" selected="">Experience</option>
+            <option value="Experienced">Experienced</option>
+            <option value="Fresher">Fresher</option>
+          </select>
+         
+          <select class="" id="availability" placeholder="Availability">
+            <option value="" selected="">Contract Capacity</option>
+            <option value="Ready to hire">Upto 50 Laks</option>
+            <option value="Ready to hire">1 Crore</option>
+            <option value="Ready to hire">more than 1 Crore</option>
+            <option value="Ready to hire">5 Crore</option>
+            <option value="Ready to hire">more than 5 Crore</option>
+            
+          </select>
+          <select class="" id="relocation" placeholder="Relocation">
+            <option value="" selected="">Contract Type</option>
+            <option value="Yes">Road Contract</option>
+            <option value="No">Trade Contract</option>
+            <option value="Yes">Infra Contract</option>
+            <option value="No">Bridge Contract</option>
+          </select>
+          <select name="state" id="location" class="form-control">
+            <option value="">Location</option>
+            <option value="Arunachal Pradesh">New Delhi</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+
+            <option value="West Bengal">West Bengal</option>
+          </select>
+        </div>
+        <div class="og-row og-li og-li-head">
+          <div class="og-li-col og-li-col-1 text-center">#</div>
+          <div class="og-li-col og-li-col-2">Name</div>
+          <div class="og-li-col og-li-col-5 text-center">Company Name</div>
+
+          <div class="og-li-col og-li-col-3 text-center">Joining Date</div>
+          <div class="og-li-col og-li-col-4 text-center">Annual Turnover</div>
+          <div class="og-li-col og-li-col-6 text-center">work Type</div>
+          <div class="og-li-col og-li-col-7 text-center">Location</div>
+      <div class="og-li-col og-li-col-7 text-center">Tools</div>
+
+          
+        </div>
+        <div class="data-row og-row og-li Experienced Engineering 7.3 Ready to hire Andhra Pradesh Yes">
+          <div class="og-li-col og-li-col-1 text-center">1</div>
+          <div class="og-li-col og-li-col-2">Aaush Raj</div>
+          <div class="og-li-col og-li-col-3 text-center">Active</div>
+          <div class="og-li-col og-li-col-4 text-center">Experienced</div>
+          <div class="og-li-col og-li-col-5 text-center">7 Crore</div>
+          <div class="og-li-col og-li-col-6 text-center">Hospital Contracts</div>
+          <div class="og-li-col og-li-col-7 text-center">West Bengal</div>
+          <div class="og-li-col og-li-col-7 text-center"><i class="fa fa-edit" style="font-size:24px"></i><i class="fa fa-trash" style="font-size:24px; padding-left:12px" ></i></div>
+          
+        </div>
+        <div class="data-row og-row og-li Fresher Engineering 7 Graduating in shortly Andhra Pradesh Yes">
+          <div class="og-li-col og-li-col-1 text-center">2</div>
+          <div class="og-li-col og-li-col-2">Mayank Das</div>
+          <div class="og-li-col og-li-col-3 text-center">Not Active</div>
+          <div class="og-li-col og-li-col-4 text-center">Fresher</div>
+          <div class="og-li-col og-li-col-5 text-center">50 Laks</div>
+          <div class="og-li-col og-li-col-6 text-center">Trade Contracts</div>
+          <div class="og-li-col og-li-col-7 text-center">Bihar</div>
+          <div class="og-li-col og-li-col-7 text-center"><i class="fa fa-edit" style="font-size:24px"></i><i class="fa fa-trash" style="font-size:24px; padding-left:12px" ></i></div>
+          
+        </div>
+        <div class="data-row og-row og-li Experienced Non-Engineering 8 Ready to hire Andhra Pradesh No">
+          <div class="og-li-col og-li-col-1 text-center">3</div>
+          <div class="og-li-col og-li-col-2">Firoz Ahmed</div>
+          <div class="og-li-col og-li-col-3 text-center">Not Active</div>
+          <div class="og-li-col og-li-col-4 text-center">Fresher</div>
+          <div class="og-li-col og-li-col-5 text-center">8 crore</div>
+          <div class="og-li-col og-li-col-6 text-center">Road Contracts</div>
+          <div class="og-li-col og-li-col-7 text-center">Assam</div>
+          <div class="og-li-col og-li-col-7 text-center"><i class="fa fa-edit" style="font-size:24px"></i><i class="fa fa-trash" style="font-size:24px; padding-left:12px" ></i></div>
+     
+        </div>
+
+      </div>
+
+      <script>document.getElementById('og-filters').onchange = function(){
+        var dataRows = document.getElementsByClassName('data-row');
+        add_class_hide(dataRows);
+        var experience= document.getElementById('experience').value;
+        var education = document.getElementById('education').value;
+        var availability = document.getElementById('availability').value;
+        var relocation = document.getElementById('relocation').value;
+        var location = document.getElementById('location').value;
+        var filterValues = new Array(experience, education, availability, relocation,location);
+        var filteredBy = filterValues.filter(Boolean);
+        var flag = 0;
+        for(i=0; i<dataRows.length; i++){
+            for(j=0; j<filteredBy.length; j++){
+              if(dataRows[i].classList.contains(filteredBy[j])){
+                flag++;
+              }
+              else{
+                flag--;
+              }
+            }
+            if(flag == filteredBy.length){
+              dataRows[i].classList.remove("hide"); 
+            }
+            flag = 0;
+        }
+      }
+      function remove_class_hide(selectedRows){
+        for(a=0; a<selectedRows.length; a++){
+          selectedRows[a].classList.remove("hide"); 
+        }
+      }
+      function add_class_hide(selectedRows){
+        for(b=0; b<selectedRows.length; b++){
+          selectedRows[b].classList.add("hide"); 
+        }
+      }</script>
+
+    </div>    </body>
+</html>

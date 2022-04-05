@@ -1,0 +1,124 @@
+{% extends 'App/base.html' %} {% load static %} {% block css %}
+
+<link rel="stylesheet" href="{% static 'App/playlist.css' %}" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> {% endblock css %} {% block content %}
+
+<div class="contianer cont-list">
+    <h1 class="heading-line">Contractor List</h1>
+    <div class="og-row" id="og-filters">
+        {% comment %} <select class="" id="experience" placeholder="Experience">
+      <option value="" selected="">Experience</option>
+      <option value="Experienced">Experienced</option>
+      <option value="Fresher">Fresher</option>
+    </select> {% endcomment %}
+
+        <select class="" id="annual_turnover_range" placeholder="annual_turnover_range">
+      <option value="" selected="">Contract Capacity</option>
+      {%for turnover in turnover_list%}
+                    <option value="{{forloop.counter}}">{{turnover}}</option>
+                {%endfor%}
+    </select>
+        <select class="" id="relocation" placeholder="Relocation">
+      <option value="" selected="">Contract Type</option>
+      {% for i  in response %}
+      <option value="{{i.name}}">
+          {{i.name}}  
+      </option>
+      {% endfor %}
+    </select>
+        <select name="states" id="states-" class="form-control">
+      <option value="">States</option>
+
+      {% for i  in states %}
+      <option value="{{i.state_name}}">
+        {{i.state_name}}  
+    </option>
+    {% endfor %}
+    
+    </select>
+    <select name="state" id="districts-" class="form-control">
+      <option value="">Districts</option>
+      <option value="Arunachal Pradesh">Katihar</option>
+    </select>
+    <div class="search-container">
+        <form action="/action_page.php" class="d-flex">
+          <input type="text" placeholder="Search.." name="search" class="srch">
+          <button type="submit" class="btn-srch"><i class="fa fa-search "></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="og-row og-li og-li-head">
+        <div class="og-li-col og-li-col-1 text-center">#</div>
+        <div class="og-li-col og-li-col-2">Name</div>
+        <div class="og-li-col og-li-col-4 text-center">Company Name</div>
+        <div class="og-li-col og-li-col-3 text-center">Joining Date</div>
+        <div class="og-li-col og-li-col-5 text-center">Annual Turnover</div>
+        <div class="og-li-col og-li-col-6 text-center">Contract Category</div>
+        <div class="og-li-col og-li-col-7 text-center">Tools</div>
+    </div>
+    {% for user in users %}
+    <div class="data-row og-row og-li">
+        <div class="og-li-col og-li-col-1 text-center">{{forloop.counter}}</div>
+        <div class="og-li-col og-li-col-2">{{user.contractor_name}}</div>
+        <div class="og-li-col og-li-col-3 text-center">{{user.company_name}}</div>
+        <div class="og-li-col og-li-col-4 text-center">{{user.created_on}}</div>
+        <div class="og-li-col og-li-col-5 text-center">
+            {{user.annual_turnover_range}}
+        </div>
+        <div class="og-li-col og-li-col-6 text-center">
+            {{user.work_categories}}
+        </div>
+        <div class="og-li-col og-li-col-7 text-center">
+            <a href="{% url 'updateuser' user.id %}"><i class="fa fa-edit" style="font-size: 24px"></i></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.getElementById("og-filters").onchange = function() {
+        var dataRows = document.getElementsByClassName("data-row");
+        add_class_hide(dataRows);
+        var experience = document.getElementById("experience").value;
+        var education = document.getElementById("education").value;
+        var availability = document.getElementById("availability").value;
+        var relocation = document.getElementById("relocation").value;
+        var location = document.getElementById("location").value;
+        var filterValues = new Array(
+            experience,
+            education,
+            availability,
+            relocation,
+            location
+        );
+        var filteredBy = filterValues.filter(Boolean);
+        var flag = 0;
+        for (i = 0; i < dataRows.length; i++) {
+            for (j = 0; j < filteredBy.length; j++) {
+                if (dataRows[i].classList.contains(filteredBy[j])) {
+                    flag++;
+                } else {
+                    flag--;
+                }
+            }
+            if (flag == filteredBy.length) {
+                dataRows[i].classList.remove("hide");
+            }
+            flag = 0;
+        }
+    };
+
+    function remove_class_hide(selectedRows) {
+        for (a = 0; a < selectedRows.length; a++) {
+            selectedRows[a].classList.remove("hide");
+        }
+    }
+
+    function add_class_hide(selectedRows) {
+        for (b = 0; b < selectedRows.length; b++) {
+            selectedRows[b].classList.add("hide");
+        }
+    }
+</script>
+{% endblock content %}

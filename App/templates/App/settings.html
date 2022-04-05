@@ -1,0 +1,32 @@
+{% extends 'App/base.html' %}
+{% load static %}
+
+{% block content %}  
+
+<div class="text">Settings</div>
+<div class="container big-card">
+    <div class="col-md-12">
+
+        <div class="projects-section-header">
+
+            <p class="time">last Updated : February, 10</p>
+        </div>
+
+        <div class="setting-content">
+            <div>
+                <label><input type='checkbox'/> Dashboard Design Implementation </label><br>
+                <label><input type='checkbox'/> Create a userflow</label><br>
+                <label><input type='checkbox'/> Screen Approvel from NDSA </label><br>
+                <label><input type='checkbox'/> Append all Screens </label><br>
+                <label><input type='checkbox'/>Reboot Dashboard settings </label><br>
+                <label><input type='checkbox'/> Logout User from Dashboard </label><br>
+                <label><input type='checkbox'/>Inable Dashboard share </label><br>
+            </div>
+            <button class="btn-save">Save Settings</button>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock content %}

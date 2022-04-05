@@ -1,0 +1,132 @@
+{% extends 'App/base.html' %} {% load static %} {% block css %}
+
+<link rel="stylesheet" href="{% static 'App/form.css' %}">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+{% endblock css %} {% block content %}
+<h1 class="form-h1">Adding a new contractor
+</h1>
+<div class="d-flex">
+    <div class="user_form">
+        <form action="{% url 'createuser' %}" method="post" class="user_form">
+            {% csrf_token %}
+            <label>Contractor's Name</label>
+            <input required type="text" class="" name="contractor_name " placeholder="Enter Contractor's Name">
+
+            <label>Company's Name</label>
+            <input required type="text" class="" name="company_name " placeholder="Enter Company's Name">
+
+            <label>Mobile Number</label>
+            <input type="text" class="" name="_id" placeholder="Enter Contractor's Mobile Number">
+
+            <label> Email</label>
+            <input type="text" class="" name="email" placeholder="Enter Contractor's Email">
+
+            <label>Work Categories</label>
+            <select required data-placeholder="Select work categories" multiple="multiple" class="multiple-selector" name="work_categories">
+                {% for i  in response %}
+                <option value="{{i.name}}">
+                    {{i.name}}  
+                </option>
+                {% endfor %}
+            </select>
+
+            <label>Annual Turnover Range</label>
+            <select required name="annual_turnover_range" id="cars">
+                <option value>
+                    Select Annual Turnover Range</option>
+                {%for turnover in turnover_list%}
+                    <option value="{{forloop.counter}}">{{turnover}}</option>
+                {%endfor%}
+            </select>
+
+            <label for="states">Preferred States</label>
+            <select name="preferred_states" id="states" multiple="multiple" class="multiple-selector">
+                        {% for i  in states %}<option value="{{i.state_name}}">
+                            {{i.state_name}}  
+                        </option>
+                        {% endfor %}
+                        </select>
+
+            <label for="districts">Preferred Districts</label>
+            <select name="preferred_districts" id="districts" multiple="multiple" class="multiple-selector">
+            </select>
+
+            <label for="">Preferred Language</label>
+            <select name="preferred_language" id="cars">
+                {%for language in languages%}
+                    <option value="{{language.1}}">{{language.0}}</option>
+                {% endfor %}
+            </select>
+
+            <div class="btn-div">
+                <button class="btn-form button1" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.multiple-selector').select2({
+            allowClear: true
+        });
+    });
+
+    function removeAllNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    state_names = document.getElementById('states');
+    district_names = document.getElementById('districts');
+    state_names.onchange = () => {
+        console.log('triggered');
+        let selected = [...state_names.options].filter(option => option.selected).map(option => option.value);
+        if (selected.length > 0) {
+            let csrftoken = getCookie('csrftoken');
+            fetch('/districts/', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        states: selected
+                    }),
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    }
+                })
+                .then((res) => res.json().then((data) => {
+                    removeAllNodes(district_names);
+                    let districts = data.districts;
+                    districts.forEach((district) => {
+                        let option = document.createElement('option');
+                        option.value = district;
+                        option.text = district;
+                        district_names.appendChild(option);
+                    });
+                }));
+        } else {
+            removeAllNodes(district_names);
+        }
+    }
+</script>
+{% endblock content %}

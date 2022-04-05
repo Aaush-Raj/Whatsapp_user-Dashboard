@@ -1,0 +1,780 @@
+{% load static %}
+<!DOCTYPE html>
+
+<!-- Coding by CodingLab | www.codinglabweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!----======== CSS ======== -->
+
+    <link rel="stylesheet" href="{% static 'App/base.css' %}">
+
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Chart js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!--<title>Dashboard Sidebar Menu</title>-->
+    {% block css %}{% endblock css %}
+</head>
+
+<body>
+    <div class="app-container">
+        <nav class="sidebar close">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                            <!--<img src="logo.png" alt="">-->
+                        </span>
+
+                    <div class="text logo-text">
+                        <span class="name">{{request.user}}</span>
+                        <span class="profession">Web developer</span>
+                    </div>
+                </div>
+
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
+
+            <div class="menu-bar">
+                <div class="menu">
+
+                    <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="text" placeholder="Search...">
+                    </li>
+
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a href="{% url 'dashboard' %}">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="{% url 'playlist' %}">
+                                <i class='bx bx-folder-open icon'></i>
+                                <span class="text nav-text">User List</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="{% url 'notifications' %}">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Notifications</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-pie-chart-alt icon'></i>
+                                <span class="text nav-text">Analytics</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-news icon'></i>
+                                <span class="text nav-text">New Tenders</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="{% url 'settings' %}">
+                                <i class='bx bx-wrench icon'></i>
+                                <span class="text nav-text">Settings</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="bottom-content">
+                    <li class="">
+                        <a href="{% url 'logout' %}">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                    </li>
+
+                    <li class="mode">
+                        <div class="sun-moon">
+                            <i class='bx bx-moon icon moon'></i>
+                            <i class='bx bx-sun icon sun'></i>
+                        </div>
+                        <span class="mode-text text">Dark mode</span>
+
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+
+                </div>
+            </div>
+
+        </nav>
+
+        <section class="home">
+            {% block content %}{% endblock content %} {% comment %}
+            <div class="text">Digital Signage</div>
+            <div class="container big-card">
+                <div class="col-md-12">
+
+
+                    <table style="width:100%; margin-left: 50px;">
+                        <tr>
+                            <th><img src="mobile.jpg" alt="" class="img-in-card" /></th>
+                            <th class="m-5"><img src="comp.jpg" alt="" class="img-in-card" /></th>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="jcc"><button class="btn1
+                                            btn-form"> Use our App Model</button></div>
+                            </td>
+                            <td>
+                                <div class="jcc1"><button class="btn1
+                                            open-button btn-form"> Add New
+                                            Screen</button>
+                                    <dialog class="modal">
+
+                                        <i class="material-icons md-18
+                                                close-button i-close">close</i>
+                                        <form action="#">
+                                            <h1 class="form-h1">Adding a new Screen
+                                            </h1>
+                                            <label>Screen Code</label>
+                                            <input type="text" class="inpt" placeholder="Enter Screen code">
+                                            <label>Screen Name</label>
+                                            <input type="text" class="inpt" placeholder="Enter Screen Name">
+                                            <label>Password</label>
+
+                                            <input type="password" class="inpt" placeholder="Enter User Password">
+                                            <label for="cars">Time Zone</label>
+                                            <select name="cars" id="cars">
+                                                    <option value="volvo">
+                                                        Pacific Standard Time
+                                                        GMT-8:00</option>
+                                                    <option value="saab">India
+                                                        Standard Time GMT+5:30</option>
+                                                    <option value="opel"> Middle
+                                                        East Time GMT+3:30</option>
+                                                    <option value="audi">European
+                                                        Central Time GMT+1:00</option>
+                                                </select>
+
+                                            <button class="btn-form
+                                                    button1">Submit</button>
+                                        </form>
+                                    </dialog>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+
+                </div>
+            </div>
+
+
+            <!--SCREEN-LIST SECTION OF CARD STARTS HERE-->
+            <div class="container-screens">
+                <div class="project-section">
+                    <div class="projects-section-header">
+                        <p>Screens</p>
+                        <p class="time">10, February</p>
+                    </div>
+                    <div class="projects-section-line">
+                        <div class="projects-status">
+                            <div class="item-status">
+                                <span class="status-number">45</span>
+                                <span class="status-type">Total Screens</span>
+                            </div>
+                            <div class="item-status">
+                                <span class="status-number">12</span>
+                                <span class="status-type">Content added</span>
+                            </div>
+                            <div class="item-status">
+                                <span class="status-number">2</span>
+                                <span class="status-type">Total Playlist</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <h1>List View of Dashboard</h1> -->
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-box-wrapper">
+                        <!--#fee4cb-->
+
+                        <div class="project-box" style="background-color: #ebeff7;
+                                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0,
+                                0, 0, 0.23) 0px 6px 6px;">
+                            <div class="img-screen-div"><img src="screen-img.jpg" class="img-screen" alt=""></div>
+                            <div class="project-box-header card-content">
+
+
+                                <span>December 10, 2020</span>
+                                <div class="more-wrapper">
+                                    <button class="project-btn-more"></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather
+                                            feather-more-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                    <circle cx="12" cy="19" r="1" />
+                                                    </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-box-content-header">
+                                <p class="box-content-header">Screen 1</p>
+                                <p class="italic-screen"> SONY Mv-234 , New Delhi
+                                </p>
+                                <!-- <p class="box-content-subheader">Prototyping</p> -->
+                            </div>
+                            <div class="box-progress-wrapper">
+                                <p class="box-progress-header">Content</p>
+                                <div class="box-progress-bar">
+                                    <span class="box-progress" style="width:
+                                                    100%; background-color: #f8ceec;
+                                                    background-image:
+                                                    linear-gradient(315deg, #f8ceec 0%,
+                                                    #a88beb 74%);"></span>
+                                </div>
+                            </div>
+                            <div class="project-box-footer">
+                                <div class="participants">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant" />
+                                    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant" />
+                                    <button class="add-participant" style="color: #ff942e">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="3"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-plus">
+                                                        <path d="M12 5v14M5 12h14" />
+                                                        </svg>
+                                                    </button>
+                                </div>
+                                <div class="add-content-button" style="color: #ff942e">
+                                    Add Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </section>
+        <!--SCREEN-LIST SECTION OF CARD STARTS HERE-->
+
+
+
+    </div>
+
+
+    <script>
+        const body = document.querySelector('body'),
+            sidebar = body.querySelector('nav'),
+            toggle = body.querySelector(".toggle"),
+            searchBtn = body.querySelector(".search-box"),
+            modeSwitch = body.querySelector(".toggle-switch"),
+            modeText = body.querySelector(".mode-text");
+
+
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click", () => {
+            sidebar.classList.remove("close");
+        })
+
+        modeSwitch.addEventListener("click", () => {
+            body.classList.toggle("dark");
+
+            if (body.classList.contains("dark")) {
+                modeText.innerText = "Light mode";
+            } else {
+                modeText.innerText = "Dark mode";
+
+            }
+        });
+
+
+        const modal = document.querySelector('.modal');
+        const openModal = document.querySelector('.open-button');
+        const closeModal = document.querySelector('.close-button');
+
+        openModal.addEventListener('click', () => {
+            modal.showModal();
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.close();
+        });
+    </script>
+</body>
+
+</html>

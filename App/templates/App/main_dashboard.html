@@ -1,0 +1,231 @@
+{% extends 'App/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.alert {
+
+      padding: 20px;
+      background-color: #9fccec;
+      color: white;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+    
+    {% if messages %}
+
+{% for message in messages  %}
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    
+    <h4   {% if message.tags %} class="{{message.tags}}" {% endif%}>
+        {{message}}
+      </h4><h4>Hii {{request.user.name}}, Welcome to Runway Technologies </h4>
+  </div>
+
+
+{% endfor %}
+  
+{% endif %}
+
+    <div class="text">Runway Technologies</div>
+    <div class="container big-card">
+        <div class="col-md-12">
+
+
+            <table style="width:100%; margin-left: 50px;">
+                <tr>
+                    <th><img src="{% static 'App/img/tender.jpg' %}" alt="" class="img-in-card" /></th>
+                    <th class="m-5"><img src="{% static 'App/img/contractor.jpg' %}" alt="" class="img-in-card" /></th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <div class="jcc"><button class="btn1
+                                    btn-form">Open Tender List</button></div>
+                    </td>
+                    <td>
+                        <div class="jcc1 new-2">
+                            <a href="{% url 'newuser'%}"><button class="btn1
+                                    open-button btn-form new"> Add New Contractor</button></a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <!--SCREEN-LIST SECTION OF CARD STARTS HERE-->
+    <div class="container-screens">
+        <div class="project-section">
+            <div class="projects-section-header">
+                <p>Contractors</p>
+                <p class="time">{{report.todays_date}}</p>
+            </div>
+            <div class="projects-section-line">
+                <div class="projects-status">
+                    <div class="item-status">
+                        <span class="status-number">{{reports.total_users}}</span>
+                        <span class="status-type">Total Contractors</span>
+                    </div>
+                    <div class="item-status">
+                        <span class="status-number">{{reports.onboarded_users.0}}</span>
+                        <span class="status-type">New Contractors added</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph-img">
+                <div class="chart">
+                    <canvas id="myChart"></canvas>
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <script>
+
+                    $(document).ready(function() {
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var ctx2 = document.getElementById('pieChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Today', 'Last 7 Days', 'Last 15 Days', 'Last 30 Days'], // x-axis labels
+                                datasets: [{
+                                    label: 'Active users', // label for the data set
+                                    data:{{reports.active_users}}, // counts
+                                    backgroundColor: [
+                                        'rgba(255, 0, 0, 0.8)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 0, 0, 0.5)',
+                                    ],
+                                    borderRadius: 10,
+                                    borderWidth: 1
+                                },{
+                                    label: 'New on-boarded users', // label for the data set
+                                    data:{{reports.onboarded_users}}, // counts
+                                    backgroundColor: [
+                                        'rgba(255, 165, 0, 0.8)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 165, 0, 0.5)',
+                                    ],
+                                    borderRadius: 10,
+                                    borderWidth: 1
+                                }, {
+                                    label: 'Responded to daily update', // label for the data set
+                                    data: {{reports.responded_to_daily_update}}, // counts
+                                    backgroundColor: [
+                                        'rgba(255, 255, 0, 0.8)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 255, 0, 0.5)',
+                                    ],
+                                    borderRadius: 10,
+                                    borderWidth: 1
+                                }, {
+                                    label: 'Tender accessed users', // label for the data set
+                                    data:{{reports.tender_accessed_users}} , // counts
+                                    backgroundColor: [
+                                        'rgba(0, 128, 0, 0.8)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(0, 128, 0, 0.5)',
+                                    ],
+                                    borderRadius: 10,
+                                    borderWidth: 1
+                                }, {
+                                    label: 'Tender document accessed users', // label for the data set
+                                    data: {{reports.tender_doc_accessed_users}}, // counts
+                                    backgroundColor: [
+                                        'rgba(0, 0, 255, 0.8)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(0, 0, 255, 0.5)',
+                                    ],
+                                    borderRadius: 10,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                         // Pie Chart
+                         var chart2 = new Chart(ctx2, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Active Users', 'Inactive Users'],
+                                datasets: [{
+                                    label: 'Users',
+                                    data: {{reports.active_inactive_count}},
+                                    backgroundColor: [
+                                        'rgb(0, 128, 0)',
+                                        'rgb(255, 0, 0)',
+                                    ],
+                                    hoverOffser: 5,
+                                    weight: 0.1
+                                }]
+                            },
+                            options: {
+                                tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                                },
+                                onClick: (e) => {
+                                    if (e.chart.tooltip.dataPoints.length > 0) {
+                                        console.log(e.chart.tooltip.dataPoints[0].dataIndex);
+                                    }
+                                }
+                            }
+                        });
+                    });
+
+                       
+                   
+
+                </script>
+            </div>
+    
+            <style>
+                .chart {
+                    height: 100%;
+                    width: 100%;
+                }
+            </style>
+        </div>
+    
+
+<style>
+    .chart {
+        height: 300px;
+        width: 700px;
+    }
+</style>
+<div class="chart">
+    <canvas id="myChart"></canvas>
+</div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+
+{% endblock content %}
